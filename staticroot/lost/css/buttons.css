@@ -1,0 +1,59 @@
+/* ЗЕЛЕНЫЕ КНОПКИ НА ДОМАШНЕЙ СТРАНИЦЕ */
+    a.button-green {
+      font-weight: 700;
+      font-size: 35px;
+      color: white;
+      text-decoration: none;
+      padding: .8em 1em calc(.8em + 3px);
+      border-radius: 5px;
+      background: rgb(64,199,129);
+      box-shadow: 0 -3px rgb(53,167,110) inset;
+      transition: 0.5s;
+    }
+    a.button-green:hover { background: rgb(53, 167, 110); }
+    a.button-green:active {
+      background: rgb(33,147,90);
+      box-shadow: 0 3px rgb(33,147,90) inset;
+    }
+
+
+
+
+
+/* КРАСНАЯ КНОПКА */
+
+    a.button-red {
+      font-weight: 700;
+      font-size: 35px;
+      color: white;
+      text-decoration: none;
+      padding: .8em 1em calc(.8em + 3px);
+      border-radius: 5px;
+      background: rgb(255,0,60);
+      box-shadow: 0 -3px rgb(178,34,34) inset;
+      transition: 0.5s;
+    }
+    a.button-red:hover { background: rgb(178,34,34); }
+    a.button-red:active {
+      background: rgb(178,34,34);
+      box-shadow: 0 3px rgb(178,34,34) inset;
+    }
+
+/* СИННЯ КНОПКА */
+
+    a.button-blue {
+      font-weight: 700;
+      font-size: 35px;
+      color: white;
+      text-decoration: none;
+      padding: .8em 1em calc(.8em + 3px);
+      border-radius: 5px;
+      background: rgb(8,106,255);
+      box-shadow: 0 -3px rgb(0,0,128) inset;
+      transition: 0.5s;
+    }
+    a.button-blue:hover { background: rgb(0,0,128); }
+    a.button-blue:active {
+      background: rgb(178,34,34);
+      box-shadow: 0 3px rgb(178,34,34) inset;
+}

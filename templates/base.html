@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<!-- БАЗОВЫЙ ШАБЛОН. ПОДГРУЖАЕТ CSS И ФОРМИРУЕТ ШАПКУ -->
+
+{% load static %}
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %} {% endblock title %}</title>
+
+        <!-- ПОДГРУЗКА CSS-->
+        {% block css %}
+            <link href="{% static 'lost/css/buttons.css' %}" rel="stylesheet"/>
+            <link href="{% static 'lost/css/base.css' %}" rel="stylesheet"/>
+        {% endblock css %}
+
+
+    </head>
+
+    <body>
+
+        <header>
+            <!-- КАРТИНКА-ЛОГОТИП С ССЫЛКОЙ НА ГЛАВНУЮ СТРАНИЦУ -->
+            <a href="{% url 'home' %}"><img src="{% static 'lost/images/logocat.png' %}"/></a>
+
+            <!-- БЛОК ШАПКИ-->
+            <nav>
+                <ul>
+                    <!-- ССЫЛКИ НА СТРАНИЦЫ В ШАПКЕ-->
+                    <li><a href="{% url 'home' %}">Главная</a></li>
+                    <li><a href="{% url 'lost_list' %}">Пропавшие животные</a></li>
+                    <li><a href="{% url 'lost_list' %}">Животные в добрые руки</a></li>
+                    <li><a href="{% url 'lost_create' %}">Подать объявление</a></li>
+                    <li><a href="{% url 'about' %}">О сайте</a></li>
+                </ul>
+
+                <div class="nav-auth">
+                    {% if user.is_authenticated %}
+                        <p>Привет, {{user.username}}!</p>
+                        <a href="{% url 'logout' %}">Выйти</a>
+                    {% else %}
+                        <p> <a href="{% url 'login' %}">Войти</a> </p>
+                        <p> <a href="{% url 'signup' %}">Создать аккаунт</a> </p>
+                    {% endif %}
+                </div>
+
+            </nav>
+
+        </header>
+
+        <!-- БЛОК ДЛЯ КОНТЕНТА НАСЛЕДУЮЩИХ ШАБЛОНОВ -->
+        {% block content %}
+        {% endblock content %}
+
+
+    </body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<!-- ШАБЛОН СТРАНИЦЫ ВХОДА (LOGIN) -->
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Главная {% endblock title %}
+
+
+<!-- ЗАГРУЖАЕМ CSS ДЛЯ ЭТОЙ СТРАНИЦЫ, ДОБАВЛЯЯ ЕГО К CSS В БАЗОВОМ ШАБЛОНЕ -->
+{% block css %} {{block.super}}
+
+{% endblock css %}
+
+
+{% block content %} {{block.super}}
+
+    <!-- ЗАГОЛОВОК СТРАНИЦЫ С КЛАССОМ, ВЫРАВНИВАЮЩИМ ЕГО ПО ЦЕНТРУ -->
+    <h2 class="home-header">Вход в систему</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{form.as_p}}
+
+        <input type="submit" value="Войти"/>
+    </form>
+
+{% endblock content %}

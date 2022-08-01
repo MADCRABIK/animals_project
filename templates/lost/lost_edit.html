@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<!-- ШАБЛОН СТРАНИЦЫ "РЕДАКТИРОВАНИЕ ОБЪЯВЛЕНИЯ" В КАТЕГОРИИ "ПРОПАВШИЕ ЖИВОТНЫЕ"-->
+<!-- !!!ВОЗМОЖНО СТОИТ СДЕЛАТЬ ОДИН ШАБЛОН ДЛЯ ВСЕХ ОБЪЯВЛЕНИЙ, ПЕРЕДЕЛАВ ФОРМУ!!! -->
+
+{% extends 'base.html' %}
+
+{% block title %} Редактирование объявления {% endblock title %}
+
+{% block content %}
+
+
+    <h2>Редактирование объявления</h2>
+
+    <!-- ЗНАЧЕНИЕ ПАРАМЕТРА ENCTYPE ПОЗВОЛЯЕТ ФОРМЕ РАБОТАТЬ C ФАЙЛАМИ (ДЛЯ КАРТИНОК)-->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- ФОРМА -->
+        {{form.as_p}}
+
+        <input type="submit" class="button-green" value="Сохранить"/>
+    </form>
+
+
+{% endblock content %}
+

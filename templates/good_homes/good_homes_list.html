@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<!-- ШАБЛОН СТРАНИЦЫ СО СПИСКОМ ОБЪЯВЛЕНИЙ ИЗ КАТЕГОРИИ "В ДОБРЫЕ РУКИ" -->
+
+{% extends 'base.html' %}
+
+{% block title %} В добрые руки {% endblock title %}
+
+{% block content %}
+
+
+    <h2>Животные в добрые руки</h2>
+
+    <!-- ЕСЛИ С СПИСКЕ ЕСТЬ ОБЪЯВЛЕНИЯ -->
+    {% if object_list.count > 0 %}
+        <!-- ОБХОДИМ ВСЕ ЗАПИСИ МОДЕЛИ В ЦИКЛЕ -->
+        {% for animal in object_list %}
+            <!-- ВЫВОДИМ ВСЕ ДАННЫЕ ИЗ ЗАПИСИ, ВКЛЮЧАЯ КАРТИНКУ -->
+            <div class="animal-chars">
+                <h2> <a href="{% url 'lost_detail' animal.pk %}">{{animal.name}} | {{animal.type}} </a> </h2>
+                <p>Пропал(а): {{animal.place}} | {{animal.time}}</p>
+                <p>Особые приметы: {{animal.special_signs}}</p>
+                <p>Подробности: {{animal.description}}</p>
+                <p>Контакты хозяина: {{animal.contact}}</p>
+                <p>Опубликовано: {{animal.published|date:"d M Y в H:m по МСК"}}</p>
+                <img class="img centered" src="{{animal.photo.url}}" style="width:250px;">
+            </div>
+        {% endfor %}
+
+    <!-- ЕСЛИ В СПИСКЕ НЕТ ОБЪЯВЛЕНИЙ -->
+    {% else %}
+        <p>В списке пропавших животных пусто.</p>
+    {% endif %}
+
+
+{% endblock content %}
+

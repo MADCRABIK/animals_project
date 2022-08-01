@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<!-- ШАБЛОН СТРАНИЦЫ С СОЗДАНИЕМ НОВОГО ОБЪЯВЛЕНИЯ "В ДОБРЫЕ РУКИ" -->
+<!-- !!!ВОЗМОЖНО СТОИТ СДЕЛАТЬ ОДИН ШАБЛОН ДЛЯ ВСЕХ ОБЪЯВЛЕНИЙ, ПЕРЕДЕЛАВ ФОРМУ!!! -->
+
+{% extends 'base.html' %}
+
+{% block title %} Новое объявление {% endblock title %}
+
+{% block content %}
+
+
+    <h2>Новое объявление</h2>
+
+    <!-- ЗНАЧЕНИЕ ПАРАМЕТРА ENCTYPE ПОЗВОЛЯЕТ ФОРМЕ РАБОТАТЬ C ФАЙЛАМИ (ДЛЯ КАРТИНОК)-->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- ФОРМА -->
+        {{form.as_p}}
+
+        <input type="submit" value="Опубликовать"/>
+    </form>
+
+
+{% endblock content %}
+
