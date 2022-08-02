@@ -1,6 +1,10 @@
 from django.shortcuts import redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
+
+# импорты для авторизации
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 
 from .models import LostAnimal
@@ -17,7 +21,6 @@ class LostAnimalListView(ListView):  # список всех животных в
 class LostAnimalCreateView(LoginRequiredMixin, CreateView):  # добавление нового животного в список потеряшек
     permission_denied_message = 'Для доступа к этой странице необходимо авторизоваться на сайте'
     login_url = '/login/'
-    redirect_field_name = 'redirected_to'
 
     model = LostAnimal
     template_name = 'lost/lost_create.html'
@@ -36,13 +39,28 @@ class LostAnimalDetailView(DetailView):  # страница конкретног
     context_object_name = 'animal'
 
 
-class LostAnimalUpdateView(UpdateView):  # редактирование конкретной модели потерянного животного
+# редактирование конкретной записи в модели
+class LostAnimalUpdateView(LoginRequiredMixin, UpdateView):
+    permission_denied_message = 'Для доступа к этой странице необходимо авторизоваться на сайте'
+    login_url = '/login/'
+
     model = LostAnimal
     template_name = 'lost/lost_edit.html'
     form_class = LostAnimalForm
 
+    def dispatch(self, request, *args, **kwargs):
+        animal = self.get_object()
+        if request.user == animal.author or request.user.is_superuser:
+            return super(LostAnimalUpdateView, self).dispatch(request, *args, **kwargs)
+        else:
+            raise Http404('У Вас нет доступа к этой странице.')
 
-def lost_animal_delete(request, pk):
+
+@login_required
+def lost_animal_delete(request, pk):  # удаление конкретной записи в модели
     animal = LostAnimal.objects.get(id=pk)
-    animal.delete()
-    return HttpResponseRedirect('/lost_list/')
+    if request.user == animal.author or request.user.is_superuser:
+        animal.delete()
+        return HttpResponseRedirect('/lost_list/')
+    else:
+        raise Http404('У Вас нет доступа к этой странице.')

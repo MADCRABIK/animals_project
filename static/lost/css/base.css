@@ -4,6 +4,10 @@
         margin-left: 440px;
     }
 
+    header nav .nav-auth p {
+        margin: -5px;
+    }
+
     header nav .nav-auth a {
         text-decoration: none;
         color: black;

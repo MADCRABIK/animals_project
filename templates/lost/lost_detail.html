@@ -33,49 +33,52 @@
     <br>
     <br>
 
-    <!-- HTML модального окна для удаления объявления -->
-    <div id="DeleteModal" class="modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" >Вы действительно хотите удалить объявление?</h3>
-            <a href="#close" title="Close" class="close">×</a>
-          </div>
-          <div class="modal-body" style="text-align: center;">
-                <a href="#close" class="button-green" style="font-size: 12px;">Отмена</a>
-                <a href="{% url 'lost_delete' animal.pk %}" class="button-red" style="font-size: 12px;">Удалить</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- HTML модального окна для удаления объявления -->
-    <div id="FoundModal" class="modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" >Нашли питомца? Поздравляем!</h3>
-            <a href="#close" title="Close" class="close">×</a>
-          </div>
-          <div class="modal-body" style="text-align: center;">
-                <a href="#close" class="button-red" style="font-size: 12px;">Отмена</a>
-                <a href="{% url 'lost_delete' animal.pk %}" class="button-green" style="font-size: 12px;">Закрыть объявление</a>
+    {% if request.user == animal.author or request.user.is_superuser %}
+        <!-- HTML модального окна для удаления объявления -->
+        <div id="DeleteModal" class="modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" >Вы действительно хотите удалить объявление?</h3>
+                <a href="#close" title="Close" class="close">×</a>
+              </div>
+              <div class="modal-body" style="text-align: center;">
+                    <a href="#close" class="button-green" style="font-size: 12px;">Отмена</a>
+                    <a href="{% url 'lost_delete' animal.pk %}" class="button-red" style="font-size: 12px;">Удалить</a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+        <!-- DRY НЕ СОБЛЮДАЕТСЯ. ПЛОХО. -->
+        <!-- HTML модального окна для закрытия объявления -->
+        <div id="FoundModal" class="modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" >Нашли питомца? Поздравляем!</h3>
+                <a href="#close" title="Close" class="close">×</a>
+              </div>
+              <div class="modal-body" style="text-align: center;">
+                    <a href="#close" class="button-red" style="font-size: 12px;">Отмена</a>
+                    <a href="{% url 'lost_delete' animal.pk %}" class="button-green" style="font-size: 12px;">Закрыть объявление</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <!-- КНОПКА "НАЙДЕН" УДАЛЯЕТ ОБЪЯВЛЕНИЕ ИЗ БАЗА ДАННЫХ И ДЕЛАЕТ ЗАПИСЬ В РАЗДЕЛ "НАЙДЕНЫ" -->
-    <!-- ДОСТУПНА ТОЛЬКО АВТОРУ ОБЪЯВЛЕНИЯ И АДМИНИСТРАТОРУ -->
-    <a href="#FoundModal" class="button-green" style="font-size: 20px;">Найден(а)</a>
+        <!-- КНОПКА "НАЙДЕН" УДАЛЯЕТ ОБЪЯВЛЕНИЕ ИЗ БАЗА ДАННЫХ И ДЕЛАЕТ ЗАПИСЬ В РАЗДЕЛ "НАЙДЕНЫ" -->
+        <!-- ДОСТУПНА ТОЛЬКО АВТОРУ ОБЪЯВЛЕНИЯ И АДМИНИСТРАТОРУ -->
+        <a href="#FoundModal" class="button-green" style="font-size: 20px;">Найден(а)</a>
 
-    <!-- КНОПКА "РЕДАКТИРОВАТЬ" ОТКРЫВАЕТ ФОРМУ РЕДАКТИРОВАНИЯ ОБЪЯВЛЕНИЯ -->
-    <!-- ДОСТУПНА ТОЛЬКО АВТОРУ ОБЪЯВЛЕНИЯ И АДМИНИСТРАТОРУ -->
-    <a href="{% url 'lost_edit' animal.pk %}" class="button-blue" style="font-size: 20px;">Редактировать</a>
+        <!-- КНОПКА "РЕДАКТИРОВАТЬ" ОТКРЫВАЕТ ФОРМУ РЕДАКТИРОВАНИЯ ОБЪЯВЛЕНИЯ -->
+        <!-- ДОСТУПНА ТОЛЬКО АВТОРУ ОБЪЯВЛЕНИЯ И АДМИНИСТРАТОРУ -->
+        <a href="{% url 'lost_edit' animal.pk %}" class="button-blue" style="font-size: 20px;">Редактировать</a>
 
-    <!-- КНОПКА "УДАЛИТЬ" УДАЛЯЕТ ОБЪЯВЛЕНИЕ ИЗ БАЗЫ ДАННЫХ -->
-    <!-- ДОСТУПНА ТОЛЬКО АВТОРУ ОБЪЯВЛЕНИЯ И АДМИНИСТРАТОРУ -->
-    <a href="#DeleteModal" class="button-red" style="font-size: 20px;">Удалить</a>
+        <!-- КНОПКА "УДАЛИТЬ" УДАЛЯЕТ ОБЪЯВЛЕНИЕ ИЗ БАЗЫ ДАННЫХ -->
+        <!-- ДОСТУПНА ТОЛЬКО АВТОРУ ОБЪЯВЛЕНИЯ И АДМИНИСТРАТОРУ -->
+        <a href="#DeleteModal" class="button-red" style="font-size: 20px;">Удалить</a>
+
+    {% endif %}
 
 
 

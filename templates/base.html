@@ -38,8 +38,13 @@
 
                 <div class="nav-auth">
                     {% if user.is_authenticated %}
-                        <p>Привет, {{user.username}}!</p>
-                        <a href="{% url 'logout' %}">Выйти</a>
+                        {% if user.is_superuser %}
+                            <p>Привет,<a href="/admin/">{{user.username}}!</a></p>
+                            <a href="{% url 'logout' %}">Выйти</a>
+                        {% else %}
+                            <p>Привет,{{user.username}}!</p>
+                            <a href="{% url 'logout' %}">Выйти</a>
+                        {% endif %}
                     {% else %}
                         <p> <a href="{% url 'login' %}">Войти</a> </p>
                         <p> <a href="{% url 'signup' %}">Создать аккаунт</a> </p>
