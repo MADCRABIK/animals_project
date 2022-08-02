@@ -1,11 +1,15 @@
 /* ШАПКА НАЧАЛО */
 
     header nav .nav-auth {
-        margin-left: 440px;
+        margin-left: 410px;
     }
 
     header nav .nav-auth p {
         margin: -5px;
+    }
+
+    header nav .nav-auth .admin-link {
+        color: red;
     }
 
     header nav .nav-auth a {
@@ -60,5 +64,6 @@
 
 
 /* ШАПКА КОНЕЦ */
+
 
 

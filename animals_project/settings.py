@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     # local apps
     'pages.apps.PagesConfig',
     'lost.apps.LostConfig',
-    'good_homes.apps.GoodHomesConfig',
+    'good_hands.apps.GoodHandsConfig',
     'accounts.apps.AccountsConfig',
 ]
 
