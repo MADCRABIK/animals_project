@@ -1,6 +1,6 @@
-from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 
 from .models import LostAnimal
@@ -14,7 +14,11 @@ class LostAnimalListView(ListView):  # список всех животных в
     template_name = 'lost/lost_list.html'
 
 
-class LostAnimalCreateView(CreateView):  # добавление нового животного в список потеряшек
+class LostAnimalCreateView(LoginRequiredMixin, CreateView):  # добавление нового животного в список потеряшек
+    permission_denied_message = 'Для доступа к этой странице необходимо авторизоваться на сайте'
+    login_url = '/login/'
+    redirect_field_name = 'redirected_to'
+
     model = LostAnimal
     template_name = 'lost/lost_create.html'
     form_class = LostAnimalForm

@@ -1,7 +1,13 @@
 /* ШАПКА НАЧАЛО */
 
     header nav .nav-auth {
-        background-color: red;
+        margin-left: 440px;
+    }
+
+    header nav .nav-auth a {
+        text-decoration: none;
+        color: black;
+        margin: 10px;
     }
 
     header img {
@@ -39,7 +45,7 @@
     }
 
     header li {
-        margin: 0px;
+        margin: 10px;
     }
 
     header li a {
