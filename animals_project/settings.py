@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # third-party apps
 
     # local apps
+    'general_data.apps.GeneralDataConfig',
     'pages.apps.PagesConfig',
     'lost.apps.LostConfig',
     'good_hands.apps.GoodHandsConfig',

@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import LostAnimal, AnimalType
+from .models import LostAnimal
+from general_data.models import AnimalType
 
 # Register your models here.
 
