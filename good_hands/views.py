@@ -17,6 +17,7 @@ from .forms import AnimalToGoodHandsForm
 class GoodHandsListView(ListView):  # список объявлений
     model = AnimalToGoodHands
     template_name = 'good_hands/good_hands_list.html'
+    queryset = model.objects.filter(moderated=True)
 
 
 class GoodHandsDetailView(DetailView):  # страница отдельного объявления

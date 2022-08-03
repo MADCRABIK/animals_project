@@ -10,7 +10,7 @@ from general_data.models import GeneralAnimalModel
 
 class LostAnimal(GeneralAnimalModel):  # модель животного-потеряшки
 
-    absolute_url = 'lost_detail'
+    absolute_url = 'home'
 
     place = models.CharField(max_length=200, verbose_name='Где пропал(а)')
     time = models.CharField(max_length=200, verbose_name='Когда пропал(а)')

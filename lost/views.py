@@ -16,6 +16,7 @@ from .forms import LostAnimalForm
 class LostAnimalListView(ListView):  # список всех животных в списке потеряшек
     model = LostAnimal
     template_name = 'lost/lost_list.html'
+    queryset = model.objects.filter(moderated=True)
 
 
 class LostAnimalCreateView(LoginRequiredMixin, CreateView):  # добавление нового животного в список потеряшек
@@ -37,6 +38,13 @@ class LostAnimalDetailView(DetailView):  # страница конкретног
     model = LostAnimal
     template_name = 'lost/lost_detail.html'
     context_object_name = 'animal'
+
+    def get_object(self, queryset=None):
+        obj = super(LostAnimalDetailView, self).get_object(queryset)
+        if obj.moderated:
+            return obj
+        else:
+            raise Http404('Объявление не найдено')
 
 
 # редактирование конкретной записи в модели

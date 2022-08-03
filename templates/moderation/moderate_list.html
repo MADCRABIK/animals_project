@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<!-- ШАБЛОН СТРАНИЦЫ СО СПИСКОМ ОБЪЯВЛЕНИЙ НА МОДЕРАЦИЮ -->
+
+{% extends 'base.html' %}
+
+{% block title %} Модерация {% endblock title %}
+
+{% block content %}
+
+
+    <h2>Объявления на модерацию</h2>
+
+    {% if lost_animals.count > 0 or good_hands_animals.count > 0 %}
+    <!-- ОБЪЯВЛЕНИЯ ИЗ КАТЕГОРИИ ПОТЕРЯШЕК (МОДЕЛЬ LostAnimal) -->
+        <!-- ОБХОДИМ ВСЕ ЗАПИСИ МОДЕЛИ В ЦИКЛЕ -->
+        {% for animal in lost_animals %}
+            <!-- ВЫВОДИМ ВСЕ ДАННЫЕ ИЗ ЗАПИСИ, ВКЛЮЧАЯ КАРТИНКУ -->
+            <div class="animal-chars">
+                <h2> {{animal.name}} | {{animal.type}} | Потеряшка </h2>
+                <p>Пропал(а): {{animal.place}} | {{animal.time}}</p>
+                <p>Особые приметы: {{animal.special_signs}}</p>
+                <p>Подробности: {{animal.description}}</p>
+                <p>Телефон для связи: {{animal.phone_number}}</p>
+                <p>Опубликовано: {{animal.published|date:"d M Y в H:m по МСК"}} | Автор: {{animal.author}}</p>
+                <img class="img centered" src="{{animal.photo.url}}" style="width:250px;">
+            </div>
+
+            <br>
+            <br>
+
+            <!-- КНОПКА "ОПУБЛИКОВАТЬ" РАЗМЕЩАЕТ ОБЪЯВЛЕНИЕ В РАЗДЕЛЕ "ПРОПАВШИЕ ЖИВОТНЫЕ" -->
+            <a href="{% url 'publish_lost' animal.pk %}" class="button-green" style="font-size: 20px;">Опубликовать</a>
+
+            <!-- КНОПКА "ОТКЛОНИТЬ" УДЛАЯЕТ ОБЪЯВЛЕНИЕ ИЗ БАЗЫ ДАННЫХ -->
+            <a href="{% url 'reject_lost' animal.pk %}" class="button-red" style="font-size: 20px;">Отклонить</a>
+
+            <br>
+            <br>
+
+        {% endfor %}
+
+
+
+
+        <!-- ОБЪЯВЛЕНИЯ ИЗ КАТЕГОРИИ В ДОБРЫЕ РУКИ (МОДЕЛЬ AnimalToGoodHands) -->
+        <!-- ОБХОДИМ ВСЕ ЗАПИСИ МОДЕЛИ В ЦИКЛЕ -->
+        {% for animal in  good_hands_animals %}
+            <!-- ВЫВОДИМ ВСЕ ДАННЫЕ ИЗ ЗАПИСИ, ВКЛЮЧАЯ КАРТИНКУ -->
+            <div class="animal-chars">
+                <h2> {{animal.name}} | {{animal.type}} | В добрые руки </h2>
+                <p>Подробности: {{animal.description}}</p>
+                <p>Контакты хозяина: {{animal.phone_number}}</p>
+                <p>Опубликовано: {{animal.published|date:"d M Y в H:m по МСК"}} | Автор {{animal.author}}</p>
+                <img class="img centered" src="{{animal.photo.url}}" style="width:250px;">
+            </div>
+
+            <br>
+            <br>
+
+            <!-- КНОПКА "ОПУБЛИКОВАТЬ" РАЗМЕЩАЕТ ОБЪЯВЛЕНИЕ В РАЗДЕЛЕ "ПРОПАВШИЕ ЖИВОТНЫЕ" -->
+            <a href="{% url 'publish_good_hands' animal.pk %}" class="button-green" style="font-size: 20px;">Опубликовать</a>
+
+            <!-- КНОПКА "ОТКЛОНИТЬ" УДЛАЯЕТ ОБЪЯВЛЕНИЕ ИЗ БАЗЫ ДАННЫХ -->
+            <a href="{% url 'reject_good_hands' animal.pk %}" class="button-red" style="font-size: 20px;">Отклонить</a>
+
+            <br>
+            <br>
+
+        {% endfor %}
+    {% else %}
+        <p>Нет объявлений на модерацию</p>
+    {% endif %}
+
+
+
+{% endblock content %}

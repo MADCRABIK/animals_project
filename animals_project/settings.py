@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',  # приложение со страницами сайта, не относящимися к другим приложениям (home, about)
     'lost.apps.LostConfig',  # приложение для публикации объявлений о пропавших животных и взаимодействия с ними
     'good_hands.apps.GoodHandsConfig',  # для публикации объявлений о животных в добрые руки и взаимодействия с ними
+    'moderation.apps.ModerationConfig',  # для модерации объявлений администратором
     'accounts.apps.AccountsConfig',  # приложение, отвечающее за аутентификация
 ]
 

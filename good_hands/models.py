@@ -10,7 +10,7 @@ from general_data.models import GeneralAnimalModel
 
 class AnimalToGoodHands(GeneralAnimalModel):  # модель животного-потеряшки
 
-    absolute_url = 'good_hands_detail'
+    absolute_url = 'home'
 
     class Meta:
         verbose_name = 'Животное в добрые руки'

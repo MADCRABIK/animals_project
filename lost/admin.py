@@ -1,13 +1,13 @@
 from django.contrib import admin
 
 from .models import LostAnimal
-from general_data.models import AnimalType
 
 # Register your models here.
 
 
 class LostAnimalAdmin(admin.ModelAdmin):  # настройка представления модели LostAnimal в админке
-    list_display = ('name',  # отображаемые поля
+    list_display = ('author',  # отображаемые поля
+                    'name',
                     'photo',
                     'place',
                     'time',
@@ -15,11 +15,13 @@ class LostAnimalAdmin(admin.ModelAdmin):  # настройка представ�
                     'description',
                     'phone_number',
                     'published',
+                    'moderated',
                     )
 
-    list_display_links = ('name', 'photo', 'description', )  # поля-ссылки
+    list_display_links = ('author', 'name', 'photo', 'description', )  # поля-ссылки
 
-    search_fields = ('name',  # поля по которым производится поиск
+    search_fields = ('author',  # поля по которым производится поиск
+                     'name',
                      'place',
                      'time',
                      'special_signs',
@@ -29,4 +31,3 @@ class LostAnimalAdmin(admin.ModelAdmin):  # настройка представ�
 
 
 admin.site.register(LostAnimal, LostAnimalAdmin)  # регистрируем модель LostAnimal в админке
-admin.site.register(AnimalType)  # регистрируем модель AnimalType в админке

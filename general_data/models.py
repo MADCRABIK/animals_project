@@ -33,9 +33,10 @@ class GeneralAnimalModel(models.Model):
     photo = models.ImageField(upload_to='photos/%Y-%m-d/', verbose_name='Фото', null=True)
 
     phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")  # валидатор для поля номера телефона
-    phone_number = models.CharField(validators=[phoneNumberRegex], max_length=12)
+    phone_number = models.CharField(validators=[phoneNumberRegex], max_length=12, verbose_name='Телефон для связи')
 
     published = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
+    moderated = models.BooleanField(default=False, verbose_name='Прошло модерацию')
 
     class Meta:
         verbose_name = 'Общая модель животных'
@@ -45,5 +46,8 @@ class GeneralAnimalModel(models.Model):
     def __str__(self):
         return self.name
 
+    # def get_absolute_url(self):
+    #     return reverse(self.absolute_url, kwargs={'pk': self.pk})
+
     def get_absolute_url(self):
-        return reverse(self.absolute_url, kwargs={'pk': self.pk})
+        return reverse(self.absolute_url)
