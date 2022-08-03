@@ -61,6 +61,6 @@ def lost_animal_delete(request, pk):  # удаление конкретной з
     animal = LostAnimal.objects.get(id=pk)
     if request.user == animal.author or request.user.is_superuser:
         animal.delete()
-        return HttpResponseRedirect('/lost_list/')
+        return HttpResponseRedirect('/lost/list/')
     else:
         raise Http404('У Вас нет доступа к этой странице.')

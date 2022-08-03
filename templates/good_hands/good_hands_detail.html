@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<!-- ШАБЛОН СТРАНИЦЫ ОТДЕЛЬНОГО ОБЪЯВЛЕНИЯ О ПРОПАВШЕМ ЖИВОТНОМ -->
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+<!-- ЗАГРУЖАЕМ CSS ДЛЯ ЭТОЙ СТРАНИЦЫ, ДОБАВЛЯЯ ЕГО К CSS В БАЗОВОМ ШАБЛОНЕ -->
+{% block css %} {{block.super}}
+
+    <link href="{% static 'lost/css/popap.css' %}" rel="stylesheet"/>
+
+{% endblock css %}
+
+
+{% block title %} {{animal.name}} в добрые руки {% endblock title %}
+
+{% block content %}
+
+
+    <h2>{{animal.name}} в добрые руки</h2>
+
+    <h2>{{animal.name}} | {{animal.type}}</h2>
+    <p>Подробности: {{animal.description}}</p>
+    <p>Телефон для связи: {{animal.phone_number}}</p>
+    <p>Опубликовано: {{animal.published|date:"d M Y в H:m по МСК"}} | Автор {{animal.author}}</p>
+    <img class="img centered" src="{{animal.photo.url}}" style="width:250px;">
+
+    <br>
+    <br>
+    <br>
+
+    <!-- ДОСТУП К КОНТЕНТУ НИЖЕ ПРЕДОСТАВЛЯЕТСЯ ТОЛЬКО АВТОРУ ОБЪЯВЛЕНИЯ ИЛИ SUPERUSER'у -->
+    {% if request.user == animal.author or request.user.is_superuser %}
+        <!-- HTML модального окна для удаления объявления -->
+        <div id="DeleteModal" class="modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" >Вы действительно хотите удалить объявление?</h3>
+                <a href="#close" title="Close" class="close">×</a>
+              </div>
+              <div class="modal-body" style="text-align: center;">
+                    <a href="#close" class="button-green" style="font-size: 12px;">Отмена</a>
+                    <a href="{% url 'good_hands_delete' animal.pk %}" class="button-red" style="font-size: 12px;">Удалить</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- DRY НЕ СОБЛЮДАЕТСЯ. ПЛОХО. -->
+        <!-- HTML модального окна для закрытия объявления -->
+        <div id="FoundModal" class="modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" >Нашли питомца? Поздравляем!</h3>
+                <a href="#close" title="Close" class="close">×</a>
+              </div>
+              <div class="modal-body" style="text-align: center;">
+                    <a href="#close" class="button-red" style="font-size: 12px;">Отмена</a>
+                    <a href="{% url 'good_hands_delete' animal.pk %}" class="button-green" style="font-size: 12px;">Закрыть объявление</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- КНОПКА "НАЙДЕН" УДАЛЯЕТ ОБЪЯВЛЕНИЕ ИЗ БАЗА ДАННЫХ И ДЕЛАЕТ ЗАПИСЬ В РАЗДЕЛ "НАЙДЕНЫ" -->
+        <a href="#FoundModal" class="button-green" style="font-size: 20px;">Найден(а)</a>
+
+        <!-- КНОПКА "РЕДАКТИРОВАТЬ" ОТКРЫВАЕТ ФОРМУ РЕДАКТИРОВАНИЯ ОБЪЯВЛЕНИЯ -->
+        <a href="{% url 'good_hands_edit' animal.pk %}" class="button-blue" style="font-size: 20px;">Редактировать</a>
+
+        <!-- КНОПКА "УДАЛИТЬ" УДАЛЯЕТ ОБЪЯВЛЕНИЕ ИЗ БАЗЫ ДАННЫХ -->
+        <a href="#DeleteModal" class="button-red" style="font-size: 20px;">Удалить</a>
+
+    {% endif %}
+
+
+
+
+{% endblock content %}

@@ -44,11 +44,11 @@ INSTALLED_APPS = [
     # third-party apps
 
     # local apps
-    'general_data.apps.GeneralDataConfig',
-    'pages.apps.PagesConfig',
-    'lost.apps.LostConfig',
-    'good_hands.apps.GoodHandsConfig',
-    'accounts.apps.AccountsConfig',
+    'general_data.apps.GeneralDataConfig',  # приложение с общими данными для других приложений
+    'pages.apps.PagesConfig',  # приложение со страницами сайта, не относящимися к другим приложениям (home, about)
+    'lost.apps.LostConfig',  # приложение для публикации объявлений о пропавших животных и взаимодействия с ними
+    'good_hands.apps.GoodHandsConfig',  # для публикации объявлений о животных в добрые руки и взаимодействия с ними
+    'accounts.apps.AccountsConfig',  # приложение, отвечающее за аутентификация
 ]
 
 
@@ -142,7 +142,7 @@ STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticroot')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'

@@ -21,8 +21,15 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
+
     path('', include('pages.urls')),
-    path('', include('lost.urls')),
+    path('lost/', include('lost.urls')),
+    path('good_hands/', include('good_hands.urls')),
+
     path('', include('django.contrib.auth.urls')),
     path('', include('accounts.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+
+# Позволяет показывать файлы (картинки). Почему - не знаю. Надо разобраться потом
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -10,6 +10,8 @@
         <meta charset="UTF-8">
         <title>{% block title %} {% endblock title %}</title>
 
+        <link rel="shortcut icon" href="{% static 'lost/images/favicon.png' %}"/>
+
         <!-- ПОДГРУЗКА CSS-->
         {% block css %}
             <link href="{% static 'lost/css/buttons.css' %}" rel="stylesheet"/>
@@ -31,15 +33,16 @@
                 <ul>
                     <!-- ССЫЛКИ НА СТРАНИЦЫ В ШАПКЕ-->
                     <li><a href="{% url 'home' %}">Главная</a></li>
+                    <li><a href="{% url 'home' %}">Модерация</a></li>
                     <li><a href="{% url 'lost_list' %}">Пропавшие животные</a></li>
-                    <li><a href="{% url 'lost_list' %}">Животные в добрые руки</a></li>
+                    <li><a href="{% url 'good_hands_list' %}">Животные в добрые руки</a></li>
 
                     <div class="dropdown">
                         <li>Подать объявление</li>
 
                         <div class="dropdown-content">
                             <a href="{% url 'lost_create' %}">Пропал питомец</a>
-                            <a href="{% url 'lost_create' %}">В добрые руки</a>
+                            <a href="{% url 'good_hands_create' %}">В добрые руки</a>
                         </div>
                     </div>
 
@@ -49,7 +52,7 @@
                 <div class="nav-auth">
                     {% if user.is_authenticated %}
                         {% if user.is_superuser %}
-                            <p>Привет,<a href="/admin/" class="admin-link">{{user.username}}!</a></p>
+                            <p>Привет, <a href="/admin/" class="admin-link">{{user.username}}!</a></p>
                             <a href="{% url 'logout' %}">Выйти</a>
                         {% else %}
                             <p>Привет, {{user.username}}!</p>

@@ -1,20 +1,17 @@
 from django.forms import ModelForm
 
-from .models import LostAnimal
+from .models import AnimalToGoodHands
 
 # Create your forms here
 
 
-class LostAnimalForm(ModelForm):  # создаем форму на основе модели LostAnimal
+class AnimalToGoodHandsForm(ModelForm):
 
     class Meta:
-        model = LostAnimal
+        model = AnimalToGoodHands
         fields = ('name',  # поля формы
                   'type',
                   'photo',
-                  'place',
-                  'time',
-                  'special_signs',
                   'description',
                   'phone_number',
                   )

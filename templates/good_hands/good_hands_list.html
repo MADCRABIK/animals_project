@@ -4,7 +4,7 @@
 
 {% extends 'base.html' %}
 
-{% block title %} В добрые руки {% endblock title %}
+{% block title %} Ищут добрые руки {% endblock title %}
 
 {% block content %}
 
@@ -17,10 +17,10 @@
         {% for animal in object_list %}
             <!-- ВЫВОДИМ ВСЕ ДАННЫЕ ИЗ ЗАПИСИ, ВКЛЮЧАЯ КАРТИНКУ -->
             <div class="animal-chars">
-                <h2> <a href="{% url 'lost_detail' animal.pk %}">{{animal.name}} | {{animal.type}} </a> </h2>
+                <h2> <a href="{% url 'good_hands_detail' animal.pk %}">{{animal.name}} | {{animal.type}} </a> </h2>
                 <p>Подробности: {{animal.description}}</p>
-                <p>Контакты хозяина: {{animal.contact}}</p>
-                <p>Опубликовано: {{animal.published|date:"d M Y в H:m по МСК"}}</p>
+                <p>Контакты хозяина: {{animal.phone_number}}</p>
+                <p>Опубликовано: {{animal.published|date:"d M Y в H:m по МСК"}} | Автор {{animal.author}}</p>
                 <img class="img centered" src="{{animal.photo.url}}" style="width:250px;">
             </div>
         {% endfor %}

@@ -1,22 +1,29 @@
 /* ШАПКА НАЧАЛО */
 
-    header nav .nav-auth {
-        margin-left: 410px;
+    /* ПАНЕЛЬ АУТЕНТИФИКАЦИИ */
+    .nav-auth {
+        overflow: visible;
+        position: absolute;
+        right: 0;
+        margin-right: 20px;
+        text-align: right;
+        float: right;
+
     }
 
-    header nav .nav-auth p {
-        margin: -5px;
+    .nav-auth p {
+        margin: 10px;
     }
 
-    header nav .nav-auth .admin-link {
+    .nav-auth .admin-link {
         color: red;
     }
 
-    header nav .nav-auth a {
+    .nav-auth a {
         text-decoration: none;
         color: black;
-        margin: 10px;
     }
+
 
     header img {
         height: 80px;
