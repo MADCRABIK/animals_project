@@ -1,5 +1,6 @@
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect, Http404
+from django.urls import reverse
 
 # импорты для авторизации
 from django.contrib.auth.decorators import login_required
@@ -9,6 +10,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView
 
 from .models import LostAnimal
 from .forms import LostAnimalForm
+
 
 # Create your views here.
 
@@ -30,8 +32,12 @@ class LostAnimalCreateView(LoginRequiredMixin, CreateView):  # добавлен�
     def form_valid(self, form):
         animal = form.save()
         animal.author = self.request.user
+
+        if self.request.user.is_superuser:
+            animal.moderated = True
+
         animal.save()
-        return redirect(self.model.get_absolute_url(animal))
+        return HttpResponseRedirect(self.model.get_absolute_url(animal))
 
 
 class LostAnimalDetailView(DetailView):  # страница конкретного объявления по первичному ключу

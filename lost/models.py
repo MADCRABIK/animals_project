@@ -1,7 +1,4 @@
 from django.db import models
-from django.urls import reverse
-from django.core.validators import RegexValidator
-from django.contrib.auth.models import User
 
 from general_data.models import GeneralAnimalModel
 
@@ -10,7 +7,7 @@ from general_data.models import GeneralAnimalModel
 
 class LostAnimal(GeneralAnimalModel):  # модель животного-потеряшки
 
-    absolute_url = 'home'
+    absolute_url = 'sent_to_moderate'
 
     place = models.CharField(max_length=200, verbose_name='Где пропал(а)')
     time = models.CharField(max_length=200, verbose_name='Когда пропал(а)')

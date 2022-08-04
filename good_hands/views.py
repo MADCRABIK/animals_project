@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404
 
 # импорты для авторизации
@@ -38,6 +38,11 @@ class GoodHandsCreateView(LoginRequiredMixin, CreateView):  # создание �
         animal = form.save()
         animal.author = self.request.user
         animal.save()
+
+        if self.request.user.is_superuser:
+            animal.moderated = True
+            animal.save()
+
         return redirect(self.model.get_absolute_url(animal))
 
 

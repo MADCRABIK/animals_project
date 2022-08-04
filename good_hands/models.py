@@ -1,8 +1,3 @@
-from django.db import models
-from django.urls import reverse
-from django.core.validators import RegexValidator
-from django.contrib.auth.models import User
-
 from general_data.models import GeneralAnimalModel
 
 # Create your models here.
@@ -10,7 +5,7 @@ from general_data.models import GeneralAnimalModel
 
 class AnimalToGoodHands(GeneralAnimalModel):  # модель животного-потеряшки
 
-    absolute_url = 'home'
+    absolute_url = 'sent_to_moderate'
 
     class Meta:
         verbose_name = 'Животное в добрые руки'

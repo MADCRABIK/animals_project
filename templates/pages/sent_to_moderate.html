@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<!-- ШАБЛОН ДОМАШНЕЙ СТРАНИЦЫ САЙТА -->
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Главная {% endblock title %}
+
+
+<!-- ЗАГРУЖАЕМ CSS ДЛЯ ЭТОЙ СТРАНИЦЫ, ДОБАВЛЯЯ ЕГО К CSS В БАЗОВОМ ШАБЛОНЕ -->
+{% block css %} {{block.super}}
+
+    <link href="{% static 'lost/css/home.css' %}" rel="stylesheet"/>
+
+{% endblock css %}
+
+
+{% block content %} {{block.super}}
+
+    <!-- ЗАГОЛОВОК СТРАНИЦЫ С КЛАССОМ, ВЫРАВНИВАЮЩИМ ЕГО ПО ЦЕНТРУ -->
+    <h2 class="home-header" style="margin-top: 120px;">Объявление отправлено на модерацию</h2>
+
+{% endblock content %}
