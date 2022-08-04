@@ -16,3 +16,4 @@ class LostAnimal(GeneralAnimalModel):  # модель животного-пот�
     class Meta:
         verbose_name = 'Потерянное животное'
         verbose_name_plural = 'Потерянные животные'
+

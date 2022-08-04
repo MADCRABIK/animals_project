@@ -20,6 +20,14 @@
 {% block content %} {{block.super}}
 
     <!-- ЗАГОЛОВОК СТРАНИЦЫ С КЛАССОМ, ВЫРАВНИВАЮЩИМ ЕГО ПО ЦЕНТРУ -->
-    <h2 class="home-header" style="margin-top: 120px;">Объявление отправлено на модерацию</h2>
+    <h2 class="home-header" style="margin-top: 120px;">
+
+        {% if user.is_superuser %}
+            Объявление было опубликовано без модерации
+        {% else %}
+            Объявление отправлено на модерацию
+        {% endif %}
+
+    </h2>
 
 {% endblock content %}

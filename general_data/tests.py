@@ -5,7 +5,7 @@ from os import remove
 
 from django.contrib.auth.models import User
 
-from general_data.models import AnimalType, GeneralAnimalModel
+from .models import AnimalType, GeneralAnimalModel
 
 
 # Create test for your models here
