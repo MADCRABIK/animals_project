@@ -24,13 +24,13 @@ class AnimalType(models.Model):  # возможные типы животных 
 class GeneralAnimalModel(models.Model):
     objects = models.Manager()
 
-    absolute_url = None  # НЕОБХОДИМО ПЕРЕОПРЕДЕЛИТЬ ДЛЯ РАБОТЫ МЕТОДА GET_ABSOLUTE_URL
+    absolute_url = 'home'  # НЕОБХОДИМО ПЕРЕОПРЕДЕЛИТЬ ДЛЯ РАБОТЫ МЕТОДА GET_ABSOLUTE_URL
 
     author = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Автор', editable=False, null=True)
     type = models.ForeignKey(AnimalType, on_delete=models.PROTECT, verbose_name='Тип животного')
     name = models.CharField(max_length=200, verbose_name='Кличка')
     description = models.TextField(verbose_name='Описание')
-    photo = models.ImageField(upload_to='photos/%Y-%m-d/', verbose_name='Фото', null=True)
+    photo = models.ImageField(upload_to='photos/', verbose_name='Фото', null=True)
 
     phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")  # валидатор для поля номера телефона
     phone_number = models.CharField(validators=[phoneNumberRegex], max_length=12, verbose_name='Телефон для связи')
