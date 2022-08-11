@@ -1,5 +1,6 @@
 from general_data.models import GeneralAnimalModel
 
+
 # Create your models here.
 
 

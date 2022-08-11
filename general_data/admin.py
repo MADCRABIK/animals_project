@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import AnimalType
+from .models import AnimalType, GeneralAnimalModel
 
 # Register your models here.
 

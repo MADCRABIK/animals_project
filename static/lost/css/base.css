@@ -8,7 +8,6 @@
         margin-right: 20px;
         text-align: right;
         float: right;
-
     }
 
     .nav-auth p {
@@ -31,7 +30,6 @@
     }
     body {
         height: 125vh;
-        background-image: #ffff;
         background-size: cover;
         font-family: sans-serif;
         margin-top: 80px;

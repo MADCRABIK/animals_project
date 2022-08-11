@@ -37,12 +37,12 @@ class GoodHandsCreateView(LoginRequiredMixin, CreateView):  # создание �
     def form_valid(self, form):
         animal = form.save()
         animal.author = self.request.user
-        animal.save()
 
+        # объявление не отправляется на модерацию, если его опубликовал superuser
         if self.request.user.is_superuser:
             animal.moderated = True
-            animal.save()
 
+        animal.save()
         return redirect(self.model.get_absolute_url(animal))
 
 
@@ -59,18 +59,17 @@ class GoodHandsUpdateView(LoginRequiredMixin, UpdateView):  # редактиро
         if request.user == animal.author or request.user.is_superuser:
             return super().dispatch(request, *args, **kwargs)
         else:
-            return self.handle_no_permission()
+            raise Http404('У Вас нет доступа к этой странице.')
 
 
-@login_required
 def good_hands_delete(request, pk):  # удаление объявления
     animal = AnimalToGoodHands.objects.get(id=pk)
 
     if request.user == animal.author or request.user.is_superuser:
         animal.delete()
-        return HttpResponseRedirect('/good_hands/list')
+        return HttpResponseRedirect('/good_hands/list/')
     else:
-        raise Http404('У Вас нет доступа к этой странице')
+        raise Http404('У Вас нет доступа к этой странице.')
 
 
 

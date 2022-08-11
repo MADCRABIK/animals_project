@@ -30,7 +30,7 @@ class GeneralAnimalModel(models.Model):
     type = models.ForeignKey(AnimalType, on_delete=models.PROTECT, verbose_name='Тип животного')
     name = models.CharField(max_length=200, verbose_name='Кличка')
     description = models.TextField(verbose_name='Описание')
-    photo = models.ImageField(upload_to='photos/', verbose_name='Фото', null=True)
+    photo = models.ImageField(upload_to='photos/', verbose_name='Фото')
 
     phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")  # валидатор для поля номера телефона
     phone_number = models.CharField(validators=[phoneNumberRegex], max_length=12, verbose_name='Телефон для связи')
@@ -42,12 +42,10 @@ class GeneralAnimalModel(models.Model):
         verbose_name = 'Общая модель животных'
         verbose_name_plural = 'Общие модели животных'
         ordering = ['-published']
+        abstract = True
 
     def __str__(self):
         return self.name
-
-    # def get_absolute_url(self):
-    #     return reverse(self.absolute_url, kwargs={'pk': self.pk})
 
     def get_absolute_url(self):
         return reverse(self.absolute_url)

@@ -9,6 +9,8 @@ pillow = "*"
 django-crispy-forms = "*"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
 python-decouple = "*"
+coverage = "*"
+django-rest-framework = "*"
 
 [dev-packages]
 

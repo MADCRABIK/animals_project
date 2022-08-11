@@ -3,10 +3,9 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 
 # импорты для авторизации
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from .models import LostAnimal
 from .forms import LostAnimalForm
@@ -33,6 +32,7 @@ class LostAnimalCreateView(LoginRequiredMixin, CreateView):  # добавлен�
         animal = form.save()
         animal.author = self.request.user
 
+        # объявление не отправляется на модерацию, если его опубликовал superuser
         if self.request.user.is_superuser:
             animal.moderated = True
 
@@ -70,7 +70,6 @@ class LostAnimalUpdateView(LoginRequiredMixin, UpdateView):
             raise Http404('У Вас нет доступа к этой странице.')
 
 
-@login_required
 def lost_animal_delete(request, pk):  # удаление конкретной записи в модели
     animal = LostAnimal.objects.get(id=pk)
     if request.user == animal.author or request.user.is_superuser:
