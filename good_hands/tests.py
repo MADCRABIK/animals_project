@@ -98,18 +98,16 @@ class GoodHandsListViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        number_of_ads = 5
-        for ad in range(number_of_ads):
-            # Создаем юзера для передачи его в поле "author" объекта
-            test_user = User.objects.create(username='test_user %s' % ad, password='TestPassword123')
-            # Создаем animal_type чтобы передать его в поле "type" объекта
-            animal_type = AnimalType.objects.create(name='test_name %s' % ad)
+        # Создаем юзера для передачи его в поле "author" объекта
+        test_user = User.objects.create(username='test_user', password='TestPassword123')
+        # Создаем animal_type чтобы передать его в поле "type" объекта
+        animal_type = AnimalType.objects.create(name='test_name')
 
-            # Создаем test_photo с помощью специального класса для передачи его в поле 'photo' объекта
-            test_photo = SimpleUploadedFile(name='test_image.png',
-                                            content=open('media/test/images/test_image.png', 'rb').read(),
-                                            content_type='image/png')
-
+        # Создаем test_photo с помощью специального класса для передачи его в поле 'photo' объекта
+        test_photo = SimpleUploadedFile(name='test_image.png',
+                                        content=open('media/test/images/test_image.png', 'rb').read(),
+                                        content_type='image/png')
+        for ad in range(2):
             # Создаем объект для дальнейшего тестирования
             AnimalToGoodHands.objects.create(author=test_user,
                                              type=animal_type,
