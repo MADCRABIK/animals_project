@@ -35,6 +35,7 @@
                     {% if user.is_superuser %}
                         <li><a href="{% url 'to_moderate' %}">Модерация</a></li>
                     {% endif %}
+                    <li><a href="{% url 'chats' %}">Сообщения</a></li>
                     <li><a href="{% url 'lost_list' %}">Пропавшие животные</a></li>
                     <li><a href="{% url 'good_hands_list' %}">Животные в добрые руки</a></li>
 

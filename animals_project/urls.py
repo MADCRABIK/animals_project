@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('lost/', include('lost.urls')),
     path('good_hands/', include('good_hands.urls')),
+    path('chats/', include('chats.urls')),
     path('moderation/', include('moderation.urls')),
 
     path('', include('django.contrib.auth.urls')),

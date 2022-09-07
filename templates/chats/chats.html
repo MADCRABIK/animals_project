@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<!-- ШАБЛОН СТРАНИЦЫ СО СПИСКОМ ДИАЛОГОВ -->
+
+{% extends 'base.html' %}
+
+{% block title %} Диалоги {% endblock title %}
+
+{% block content %}
+
+    {% if dialogs.count > 0 %}
+        {% for dialog in dialogs %}
+            {% with last_message=dialog.message_set.last %}
+                {% for member in dialog.members.all %}
+                    {% if not member == request.user %}
+                        <p><a href="{% url 'chat_detail' dialog.pk %}">Диалог с {{member}}</a></p>
+                        <p>{{last_message.from_user}} : {{last_message.message}}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+        {% endfor %}
+    {% else %}
+        <p>Нет сообщений.</p>
+    {% endif %}
+
+
+{% endblock content %}

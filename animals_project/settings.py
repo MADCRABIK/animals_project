@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'lost.apps.LostConfig',  # приложение для публикации объявлений о пропавших животных и взаимодействия с ними
     'good_hands.apps.GoodHandsConfig',  # для публикации объявлений о животных в добрые руки и взаимодействия с ними
     'moderation.apps.ModerationConfig',  # для модерации объявлений администратором
+    'chats.apps.ChatsConfig',  # для личных сообщений
     'accounts.apps.AccountsConfig',  # приложение, отвечающее за аутентификация
 ]
 

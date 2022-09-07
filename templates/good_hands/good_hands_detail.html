@@ -76,6 +76,10 @@
 
     {% endif %}
 
+    {% if user.is_authenticated and user != animal.author and animal.author is not None %}
+        <a class="button-green" style="font-size: 20px;" href="{% url 'get_dialog' animal.author.id %}">Написать автору</a>
+    {% endif %}
+
 
 
 
